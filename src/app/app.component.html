@@ -1,0 +1,18 @@
+<div class="app-header">
+  <h1>Tic Tac Toe</h1>
+  <button (click)="resetBoard()" class="new-game-button">New Game</button>
+</div>
+<header class="sub-header">
+  <h2 class="current-player">Current player: {{ currentPlayer === -1 ? "X" : "O" }}</h2>
+</header>
+<div class="grid" [ngClass]="{ 'game-over': gameIsOver }">
+  <div class="row" *ngFor="let row of squares; let r = index">
+    <div class="col" *ngFor="let col of row; let c = index">
+      <app-square
+        [value]="squares[r][c]"
+        [currentPlayer]="currentPlayer"
+        (onClick)="updateSquares(r, c, $event)"
+      ></app-square>
+    </div>
+  </div>
+</div>
