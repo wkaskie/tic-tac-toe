@@ -11,6 +11,7 @@ export class AppComponent implements OnInit {
   squares = [[]];
   currentPlayer = -1;
   gameIsOver: boolean;
+  theWinner: number;
   
   updateSquares(squareValue: number, row: number, column: number) {
     if(this.gameIsOver) { return; }
@@ -28,6 +29,7 @@ export class AppComponent implements OnInit {
     this.board.squares$.subscribe(board => this.squares = board);
     this.board.currentPlayer$.subscribe(player => this.currentPlayer = player);
     this.board.gameIsOver$.subscribe(status => {console.log(status); this.gameIsOver = status;});
+    this.board.winner$.subscribe(winner => this.theWinner = winner);
   }
 
 }

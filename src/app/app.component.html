@@ -4,7 +4,10 @@
 </div>
 <div class="body" [ngClass]="{'player-o': currentPlayer === 1}">
   <header class="sub-header">
-    <h2 class="current-player">Current player: {{ currentPlayer === -1 ? "X" : "O" }}</h2>
+    <h2 *ngIf="theWinner === 0; else winner" class="current-player">Current player: {{ currentPlayer === -1 ? "X" : "O" }}</h2>
+    <ng-template #winner>
+      <h2 class="current-player">{{ theWinner === -3 ? "X" : "O" }} WINS!!</h2>
+    </ng-template>
   </header>
   <div class="grid" [ngClass]="{ 'game-over': gameIsOver }">
     <div class="row" *ngFor="let row of squares; let r = index">

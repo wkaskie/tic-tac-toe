@@ -11,6 +11,7 @@ export class BoardControllerService {
   total = 3; // squares per row/column
   currentPlayer$: BehaviorSubject<number> = new BehaviorSubject(-1); // default to X
   gameIsOver$: BehaviorSubject<boolean> = new BehaviorSubject(false);
+  winner$: BehaviorSubject<number> = new BehaviorSubject(0);
 
   resetBoard() {
     this.squares$.next([
@@ -50,11 +51,11 @@ export class BoardControllerService {
     return theWinner;
   }
   checkForWinner() {
-    // TODO: determine which player is the winner
     // TODO: highlight the winning cells
     let columnTotal = [0, 0, 0];
     let angle1 = 0;
     let angle2 = 0;
+    let theWinner = 0;
     for (let r = 0; r < this.total; r++) {
       let rowTotal = 0;
       const currentBoard = this.squares$.getValue();
@@ -66,10 +67,14 @@ export class BoardControllerService {
         columnTotal[c] += currentBoard[r][c];
       }
       if(rowTotal === -3 || rowTotal === 3 ) {
-        return rowTotal;
+        theWinner = rowTotal;
       };
     }
-    return this.identifyTheWinner(angle1, angle2, columnTotal);
+    if (theWinner === 0) { // if a row won, it will not be 0
+      theWinner = this.identifyTheWinner(angle1, angle2, columnTotal);
+    }
+    this.winner$.next(theWinner);
+    return theWinner;
   }
   constructor() { }
 }
