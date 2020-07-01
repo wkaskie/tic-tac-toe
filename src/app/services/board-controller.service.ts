@@ -23,6 +23,7 @@ export class BoardControllerService {
 
   newGame() {
     this.gameIsOver$.next(false);
+    this.winner$.next(0);
     this.resetBoard();
   }
 
