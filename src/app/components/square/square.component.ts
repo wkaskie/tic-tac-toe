@@ -7,15 +7,13 @@ import { Component, OnInit, Output, Input, EventEmitter } from '@angular/core';
 })
 export class SquareComponent implements OnInit {
   @Input() value: number;
-  @Input() currentPlayer: number;
   @Output() onClick: EventEmitter<number> = new EventEmitter<number>()
 
   player: string;
 
   handleClick() {
-    const newValue = this.currentPlayer;
-    console.log(newValue);
-    this.onClick.emit(newValue);
+    console.log('square is clicked');
+    this.onClick.emit(this.value);
   }
 
   constructor() { }
