@@ -15,10 +15,14 @@ export class AppComponent implements OnInit {
   
   updateSquares(squareValue: number, row: number, column: number) {
     if(this.gameIsOver) { return; }
-    debugger;
     if(squareValue !== 0) { alert('Choose an empty square'); return;}
     this.board.updateSquares(row, column);
   };
+
+  highlightMe(row: number, col: number) {
+    const coords = '' + row + col;
+    return this.board.determineSquareWins(coords);
+  }
 
   startNewGame() { this.board.newGame(); }
 
@@ -28,7 +32,7 @@ export class AppComponent implements OnInit {
     this.board.resetBoard();
     this.board.squares$.subscribe(board => this.squares = board);
     this.board.currentPlayer$.subscribe(player => this.currentPlayer = player);
-    this.board.gameIsOver$.subscribe(status => {console.log(status); this.gameIsOver = status;});
+    this.board.gameIsOver$.subscribe(status => this.gameIsOver = status);
     this.board.winner$.subscribe(winner => this.theWinner = winner);
   }
 

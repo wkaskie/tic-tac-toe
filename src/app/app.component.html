@@ -15,6 +15,7 @@
         <app-square
           [value]="col"
           (onClick)="updateSquares($event, r, c)"
+          [ngClass]="{'winner': highlightMe(r, c)}"
         ></app-square>
       </div>
     </div>

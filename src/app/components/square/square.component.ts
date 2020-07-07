@@ -12,7 +12,6 @@ export class SquareComponent implements OnInit {
   player: string;
 
   handleClick() {
-    console.log('square is clicked');
     this.onClick.emit(this.value);
   }
 
