@@ -35,7 +35,7 @@ export class BoardControllerService {
     // Emit updated values
     this.squares$.next(currentBoard);
     this.currentPlayer$.next(-currentPlayer);
-    this.gameIsOver$.next( this.isGameOver() || this.checkForWinner() !== 0);
+    this.gameIsOver$.next( this.checkForWinner() !== 0 || this.isGameOver() );
   }
 
   isGameOver() {
@@ -77,5 +77,6 @@ export class BoardControllerService {
     this.winner$.next(theWinner);
     return theWinner;
   }
+
   constructor() { }
 }
