@@ -45,6 +45,7 @@ export class BoardControllerService {
 
   identifyTheWinner(angle1, angle2, rowTotal, columnTotal): WinCondition {
     let theWinner: WinCondition = 0;
+    this.winnerCords = [];
     [-3, 3].forEach((testValue: WinCondition) => {
       const winnerLocation = [angle1, angle2, ...rowTotal, ...columnTotal].indexOf(testValue);
       if ( winnerLocation !== -1) {
